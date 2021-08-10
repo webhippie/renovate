@@ -1,0 +1,31 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "description": [
+        "Docker preset used by Webhippie"
+    ],
+    "extends": [
+        "github>webhippie/renovate:base"
+    ],
+    "regexManagers": [{
+        "fileMatch": [
+            "Dockerfile"
+        ],
+        "matchStrings": [
+            "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>.*?))?\nENV .*?_VERSION=(?<currentValue>.*)"
+        ]
+    }],
+    "packageRules": [{
+        "description": "Automerge docker version updates",
+        "groupName": "docker updates",
+        "matchDatasources": [
+            "docker"
+        ],
+        "matchUpdateTypes": [
+            "minor",
+            "patch"
+        ],
+        "semanticCommitType": "deps",
+        "semanticCommitScope": "minor",
+        "automerge": true
+    }]
+}
